@@ -8,7 +8,7 @@ var terminal = {
     inputHandler: function(event) {
         if (event.key === "Enter") {
             let value = this.input.value;
-            this.output.innerHTML += `$ ${value} <br>`;
+            this.output.innerHTML += `$ ${value}<br>`;
             if (this.output.scrollHeight > this.output.offsetHeight) { // If the output is overflowing
                 this.output.innerHTML = this.output.innerHTML.slice(this.output.innerHTML.indexOf("<br>") + 4); // Remove the first line
             }
