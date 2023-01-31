@@ -8,8 +8,8 @@ body {
 
 #game {
     display: grid;
-    grid-template-columns: 50vw 50vw;
-    grid-template-rows: 50vh 50vh;
+    grid-template-columns: 70vw 30vw;
+    grid-template-rows: 70vh 30vh;
     grid-template-areas:
         "terminal status"
         "inventory map";
@@ -51,7 +51,6 @@ body {
     flex: 1;
     background-color: inherit;
     color: inherit;
-    /* set the input font size to be the same as the terminal output */
     font-size: 1em;
 }
 
@@ -60,6 +59,43 @@ body {
     display: flex;
     background-color: #00ff00;
     color: #fff;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 2fr 4fr 1fr;
+    grid-template-areas: 
+        "stats"
+        "effects"
+        "skills"
+        "allegience";
+}
+#stats {
+    grid-area: stats;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #ff0;
+}
+#effects {
+    grid-area: effects;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #0f0;
+}
+#skills {
+    grid-area: skills;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+#allegience {
+    grid-area: allegience;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
 }
 
 #inventory {
