@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 define("broadcaster", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -101,32 +110,23 @@ define("game", ["require", "exports", "terminal", "status", "inventory", "map"],
             this.map = new map_1.Map();
         }
         run() {
-            this.canType = false;
-            this.println('You wake up next to the burning remains of your spaceship.', 1000);
-            this.println('You don\'t remember anything.', 1000);
-            this.println('The air is hot here and the land is very arid.', 1000);
-            this.println('The heat is unbearable.', 1000);
-            this.println('It takes a second to stand up, but you manage to find your bearings.', 1000);
-            this.println('There is nothing but foreign desert for miles in every direction.', 1000);
-            this.canType = true;
+            return __awaiter(this, void 0, void 0, function* () {
+                this.canType = false;
+                yield this.println('You wake up next to the burning remains of your spaceship.', 1000);
+                yield this.println('You don\'t remember anything.', 1000);
+                yield this.println('The air is hot here and the land is very arid.', 1000);
+                yield this.println('The heat is unbearable.', 1000);
+                yield this.println('It takes a second to stand up, but you manage to find your bearings.', 1000);
+                yield this.println('There is nothing but foreign desert for miles in every direction.', 1000);
+                this.canType = true;
+            });
         }
         println(line, delay = 0) {
-            this.terminal.display(line + '<br>', delay);
+            return __awaiter(this, void 0, void 0, function* () {
+                yield this.delay(delay);
+                this.terminal.display(line + '<br>');
+            });
         }
-        // public async run() {
-        //     this.canType = false;
-        //     await this.println('You wake up next to the burning remains of your spaceship.', 1000)
-        //     await this.println('You don\'t remember anything.', 1000);
-        //     await this.println('The air is hot here and the land is very arid.', 1000);
-        //     await this.println('The heat is unbearable.', 1000);
-        //     await this.println('It takes a second to stand up, but you manage to find your bearings.', 1000);
-        //     await this.println('There is nothing but foreign desert for miles in every direction.', 1000);
-        //     this.canType = true;
-        // }
-        // private async println(line: string, delay: number = 0) {
-        //     await this.delay(delay);
-        //     this.terminal.display(line + '<br>');
-        // }
         delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
@@ -145,7 +145,9 @@ define("main", ["require", "exports", "game"], function (require, exports, game_
         run();
     })();
     function run() {
-        let game = new game_1.Game();
-        game.run();
+        return __awaiter(this, void 0, void 0, function* () {
+            let game = new game_1.Game();
+            yield game.run();
+        });
     }
 });
