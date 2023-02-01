@@ -6,7 +6,7 @@ import { Game } from "./game";
     }
 )();
 
-async function run() {
+function run() {
     let game = new Game();
-    await game.run();
+    game.run();
 }
