@@ -132,7 +132,7 @@ define("main", ["require", "exports", "game"], function (require, exports, game_
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     (function () {
-        window.onload = () => __awaiter(this, void 0, void 0, function* () { yield run(); });
+        window.onload = () => { run(); };
     })();
     function run() {
         return __awaiter(this, void 0, void 0, function* () {
