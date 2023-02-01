@@ -2,11 +2,11 @@ import { Game } from "./game";
 
 (
     function() {
-        window.onload = () => {run()};
+        window.onload = async () => {await run()};
     }
 )();
 
-function run() {
+async function run() {
     let game = new Game();
-    game.run();
+    await game.run();
 }

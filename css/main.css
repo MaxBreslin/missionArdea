@@ -81,21 +81,21 @@ body {
     display: flex;
     width: 100%;
     height: 100%;
-    background-color: #0f0;
+    background-color: rgb(226, 150, 63);
 }
 #skills {
     grid-area: skills;
     display: flex;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: rgb(219, 97, 97);
 }
 #allegience {
     grid-area: allegience;
     display: flex;
     width: 100%;
     height: 100%;
-    background-color: #000;
+    background-color: rgb(33, 101, 141);
 }
 
 #inventory {
