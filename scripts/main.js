@@ -142,7 +142,7 @@ define("main", ["require", "exports", "game"], function (require, exports, game_
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     (function () {
-        window.onload = () => { run(); };
+        run();
     })();
     function run() {
         let game = new game_1.Game();

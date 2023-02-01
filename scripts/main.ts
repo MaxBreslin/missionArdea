@@ -2,7 +2,7 @@ import { Game } from "./game";
 
 (
     function() {
-        window.onload = () => { run() };
+        run();
     }
 )();
 
