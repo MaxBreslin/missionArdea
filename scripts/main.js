@@ -103,13 +103,29 @@ define("game", ["require", "exports", "terminal", "status", "inventory", "map"],
     class Game {
         constructor() {
             this.canType = true; // Can the player type? If so, sends input to the terminal.
+            this.waitingFor = {};
+            this.checkpoint = 0;
             this.terminal = new terminal_1.Terminal();
             this.terminal.on('terminalInput', this.terminalInputHandler.bind(this));
             this.status = new status_1.Status();
             this.inventory = new inventory_1.Inventory();
             this.map = new map_1.Map();
+            this.checkpoint = this.getCheckpoint();
         }
         run() {
+            return __awaiter(this, void 0, void 0, function* () {
+                if (this.checkpoint === 0) {
+                    yield this.start();
+                    this.setCheckpoint(1);
+                }
+                else {
+                    this.terminal.display('Checkpoint ' + this.checkpoint + ' not implemented yet.<br>', 1000);
+                    this.terminal.display('Type \'restart\' to start over.<br>', 1000);
+                    this.waitForInput('restart', () => { this.terminal.display('Restarting...<br>'); this.setCheckpoint(0); window.location.reload(); });
+                }
+            });
+        }
+        start() {
             return __awaiter(this, void 0, void 0, function* () {
                 this.canType = false;
                 yield this.println('You wake up next to the burning remains of your spaceship.', 1000);
@@ -120,6 +136,16 @@ define("game", ["require", "exports", "terminal", "status", "inventory", "map"],
                 yield this.println('There is nothing but foreign desert for miles in every direction.', 1000);
                 this.canType = true;
             });
+        }
+        setCheckpoint(newCheckpoint) {
+            localStorage.setItem('checkpoint', newCheckpoint.toString());
+        }
+        getCheckpoint() {
+            let checkpoint = localStorage.getItem('checkpoint');
+            if (checkpoint === null) {
+                return 0;
+            }
+            return parseInt(checkpoint);
         }
         println(line, delay = 0) {
             return __awaiter(this, void 0, void 0, function* () {
@@ -133,7 +159,13 @@ define("game", ["require", "exports", "terminal", "status", "inventory", "map"],
         terminalInputHandler(event) {
             if (this.canType) {
                 this.terminal.display('~ ' + event + '<br>');
+                if (this.waitingFor[event]) {
+                    this.waitingFor[event].forEach((callback) => callback());
+                }
             }
+        }
+        waitForInput(input, callback) {
+            this.waitingFor[input] = [callback];
         }
     }
     exports.Game = Game;
